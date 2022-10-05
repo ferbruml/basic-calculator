@@ -9,7 +9,7 @@ import {
 const styles = StyleSheet.create({
     button: {
         fontSize: 40,
-        height: Dimensions.get('window').width / 4, // height e width serão iguais a width/4, ou seja, os botões serão quadrados
+        height: Dimensions.get('window').width / 4,
         width: Dimensions.get('window').width / 4,
         padding: 20,
         backgroundColor: '#f0f0f0',
