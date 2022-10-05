@@ -13,12 +13,12 @@ const initialState = {
   clearDisplay: false,
   operation: null,
   values: [0, 0],
-  current: 0, // apontador para os índices 0 ou 1 do array values
+  current: 0, 
 }
 
 const App: () => Node = () => {
   const [displayValue, setDisplayValue] = useState('0')
-  const [state, setState] = useState({...initialState}) // o spread operator aqui está criando um novo objeto que não tem relação com o original
+  const [state, setState] = useState({...initialState}) 
 
   const addDigit = n => {
     
@@ -33,13 +33,13 @@ const App: () => Node = () => {
 
     const currentValue = clearDisplay ? '' : state.displayValue
     const displayValue = currentValue + n
-    setState({ displayValue, clearDisplay: false}) // aqui é false pq já foi tratado acima se for true
+    setState({ displayValue, clearDisplay: false}) 
 
     if (n !== '.') {
       const newValue = parseFloat(displayValue)
-      const values = [...state.values] // criamos um clone do estado atual para manter a imutabilidade
+      const values = [...state.values] 
       values[state.current] = newValue
-      setState({ values }) // atualizando o estado com o novo valor, garantindo a mutabilidade
+      setState({ values }) 
     }
   }
 
@@ -52,21 +52,20 @@ const App: () => Node = () => {
     }
     else {
       const equals = operation === '='
-      const values = [...state.values] // clone do array atual que temos no objeto do estado
+      const values = [...state.values] 
       try {
-        values[0] = eval(`${values[0]} ${state.operation} ${values[1]}`) // avalia uma expressão e retorna o resultado dela, diferente do console.log que só imprime o template string
+        values[0] = eval(`${values[0]} ${state.operation} ${values[1]}`) 
       }
-      catch(e) { // pode dar erro se a expressão a ser avaliada for, por exemplo, 23 = 2
+      catch(e) { 
         values[0] = state.values[0]
       }
 
       values[1] = 0
       setState({
-        displayValue: values[0], // o resultado da operação sempre vai para o índice 0
+        displayValue: values[0], 
         operation: equals ? null : operation,
         current: equals ? 0 : 1,
-        //clearDisplay: !equals, // não limpa display depois do último =
-        clearDisplay: true, // limpa display depois do último =
+        clearDisplay: true,
         values // setamos o estado
       })
     }
